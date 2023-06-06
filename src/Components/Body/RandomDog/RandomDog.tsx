@@ -1,10 +1,13 @@
 import React from 'react'
 import './RandomDog.css'
 
-function RandomDog() {
+type RandomDogProp = {
+  filepath : string
+}
+function RandomDog({ filepath }: RandomDogProp) {
   return (
     <div>
-      <h1>This is a Random Dog Component</h1>
+      <img src={filepath}/>
     </div>
   )
 }
