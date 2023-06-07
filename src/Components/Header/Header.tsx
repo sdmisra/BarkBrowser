@@ -1,11 +1,14 @@
 import React from 'react'
 import './Header.css'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
-    <header className="app-header">
-      <h2 className="header-title">This is a header!</h2>
-      <h3 className="header-link">This is a link!</h3>
+    <header>
+      <Link to='/' className="app-header">
+      <h2 className="header-title">Bark Browser</h2>
+      <h3 className="header-link">The title is a link!</h3>
+      </Link>
     </header>
   )
 }
