@@ -5,13 +5,13 @@ import Footer from '../Footer/Footer'
 import './App.css';
 
 function App() {
-  const [chosenDogImage, setDogImage] = useState('')
+  const [randDogImage, setDogImage] = useState('')
 
   const getRandomDog = async () => {
     try {
       const response = await fetch('https://dog.ceo/api/breeds/image/random');
       if (!response.ok) {
-        throw new Error('Error in Random Call!' + `code: ${response.status}`)
+        throw new Error(`Error in Random Call! code: ${response.status}`)
       }
       const randomDog = await response.json()
       setDogImage(randomDog.message)
@@ -22,15 +22,15 @@ function App() {
   }
 
   useEffect(()=> {
-    if (chosenDogImage === '') {
+    if (randDogImage === '') {
       getRandomDog()
     }
-  },[])
+  },[randDogImage])
 
   return (
     <div className="App">
       <Header/>
-      <TheWindow ChosenDogImage={chosenDogImage}/>
+      <TheWindow randDogImage={randDogImage} getRandomDog={getRandomDog}/>
       <Footer/>
     </div>
   );
