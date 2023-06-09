@@ -1,7 +1,13 @@
 import React from 'react'
+import DogCard from '../DogCard/DogCard';
 import './SavedDogs.css'
 
-function SavedDogs() {
+type SavedDogsProps = {
+  saved:string[]
+}
+
+function SavedDogs({saved}:SavedDogsProps) {
+  console.log(saved)
   return (
     <div>
       <h1>These are Saved Dog Pictures</h1>

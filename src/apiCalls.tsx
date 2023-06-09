@@ -1,5 +1,3 @@
-
-
 // const getRandomDog = async () => {
 //   try {
 //     const response = await fetch('https://dog.ceo/api/breeds/image/random');
@@ -13,4 +11,4 @@
 //   }
 // }
 // export default getRandomDog;
-export {}
+ export {}

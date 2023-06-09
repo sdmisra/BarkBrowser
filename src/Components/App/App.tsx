@@ -4,8 +4,10 @@ import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import './App.css';
 
+
 function App() {
-  const [randDogImage, setDogImage] = useState('')
+  const [displayedDogImage, setDogImage] = useState('')
+  const [savedDogs, setSavedDogs] = useState([])
 
   const getRandomDog = async () => {
     try {
@@ -21,16 +23,37 @@ function App() {
     }
   }
 
+  const getSpecificBreed = async (breed: string) => {
+    console.log(breed)
+    try {
+      const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`);
+      if (!response.ok) {
+        throw new Error(`Error in Random Call! code: ${response.status}`)
+      }
+      const oneOfABreed = await response.json()
+      console.log(oneOfABreed.message)
+      setDogImage(oneOfABreed.message)
+      return oneOfABreed;
+    } catch(error) {
+      return error
+    }
+  }
+
   useEffect(()=> {
-    if (randDogImage === '') {
+    if (displayedDogImage === '') {
       getRandomDog()
     }
-  },[randDogImage])
+  },[displayedDogImage])
 
   return (
     <div className="App">
       <Header/>
-      <TheWindow randDogImage={randDogImage} getRandomDog={getRandomDog}/>
+      <TheWindow 
+      displayedDogImage={displayedDogImage} 
+      getRandomDog={getRandomDog}
+      getSpecificBreed={getSpecificBreed}
+      savedDogs={savedDogs}
+      setSavedDogs={setSavedDogs}/>
       <Footer/>
     </div>
   );

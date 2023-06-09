@@ -1,28 +1,30 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import SavedDogs from '../SavedDogs/SavedDogs'
 import RandomDog from '../RandomDog/RandomDog'
-import SearchResults from '../SearchResults/SearchResults'
+import SearchForm from '../SearchForm/SearchForm'
 import {Switch, Route} from 'react-router-dom';
 import { StringArraySupportOption } from 'prettier';
-// This could also be the place to import SearchResults, RandomDog,and SavedDogs and use the route to pick which one to render.
+// This could also be the place to import SearchForm, RandomDog,and SavedDogs and use the route to pick which one to render.
 
 type WindowProps = {
-  randDogImage : string
+  displayedDogImage : string
   getRandomDog: () => Promise<any>
+  getSpecificBreed: (breed : string) => Promise<any>
+  savedDogs: string[]
+  setSavedDogs: Dispatch<SetStateAction<never[]>>
 }
 
-function TheWindow({ randDogImage, getRandomDog }: WindowProps) {
+function TheWindow({ displayedDogImage, getRandomDog, getSpecificBreed, savedDogs}: WindowProps) {
+
   return (
     <div className="main-container">
       <Switch>
         <Route exact path='/'>
-          <RandomDog filepath={randDogImage} getRandomDog={getRandomDog}/>
-        </Route>
-        <Route path='/results/'>
-          <SearchResults/>
+          <RandomDog filepath={displayedDogImage} getRandomDog={getRandomDog}/>
+          <SearchForm getSpecificBreed={getSpecificBreed}/>
         </Route>
         <Route path='/saved/'>
-          <SavedDogs />
+          <SavedDogs saved={savedDogs}/>
         </Route>
       </Switch>
     </div>
